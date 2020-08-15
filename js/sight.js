@@ -1,15 +1,3 @@
-class Sight {
-	constructor(selector, width, height) {
-		this.svg = new SVGElement('svg');
-		this.svg.attr({'viewbox':`0 0 ${width} ${height}`})
-		this.svg.append(selector);
-	}
-	
-	draw(type, attrs) {
-		return new SVGElement(type).attr(attrs).append(this.svg);
-	}
-}
-
 class SVGElement {
 	
 	constructor(type) {
@@ -20,8 +8,8 @@ class SVGElement {
 	}
 	
 	attr (attrs) {
-		
-		for([key,value] of Object.entries(attrs)) {
+
+		for(const [key,value] of Object.entries(attrs)) {
 			this.node.setAttributeNS(null,key,value);
 		}
 		
@@ -35,3 +23,17 @@ class SVGElement {
 	}
 	
 }
+
+class Sight {
+	
+	constructor(selector, width, height) {
+		this.svg = new SVGElement('svg');
+		this.svg.attr({'viewbox':`0 0 ${width} ${height}`});
+		this.svg.append(selector);
+	}
+	
+	draw(type, attrs) {
+		return new SVGElement(type).attr(attrs).append(this.svg);
+	}
+}
+
